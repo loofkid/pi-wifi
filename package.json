@@ -1,6 +1,6 @@
 {
   "name": "@loofkid/pi-wifi",
-  "version": "1.3.3",
+  "version": "1.3.4",
   "description": "Module for accessing wpa_cli on Raspberry Pi 3.",
   "main": "index.js",
   "scripts": {
