@@ -53,6 +53,17 @@ export interface Status {
  */
 declare function checkConnection(ssid: string, callback: (err: Error, result: ConnectionCheck) => any): any;
 /**
+ * @description Returns the state of the network with the specified ssid
+ * @param ssid Network ssid
+ * @param callback if unable to get network status, Object with connection details
+ * {
+ *   selected: true | false,
+ *   connected: true | false,
+ *   ip: 192.168.0.2
+ * }
+ */
+export const check: typeof checkConnection;
+/**
  * @description Connects to a network with the parameters specified (This can connect to open and secure networks including EAP 802.1x)
  * @param details Network details
  * - {string} key_mgmt You can specify the type of security to use. (Optional)
@@ -62,6 +73,16 @@ declare function checkConnection(ssid: string, callback: (err: Error, result: Co
  * @param callback Returns error if the network creation isn't successful
  */
 declare function connection(details: NetworkDetails, callback: (error: Error) => any): any;
+/**
+ * @description Connects to a network with the parameters specified (This can connect to open and secure networks including EAP 802.1x)
+ * @param details Network details
+ * - {string} key_mgmt You can specify the type of security to use. (Optional)
+ * - {string} ssid (Optional, required for secure and enterprise networks)
+ * - {string} username (Optional, required for enterprise networks)
+ * - {string} password (Optional, required for secure or enterprise networks)
+ * @param callback Returns error if the network creation isn't successful
+ */
+export const connectTo: typeof connection;
 /**
  * @description Enables a network, saves the configuration and selects the network with the id provided
  * @param networkId Network id
@@ -76,11 +97,24 @@ export function connectToId(networkId: number, callback: (error: Error) => any):
  */
 declare function secureConnection(ssid: string, password: string, callback: (error: Error) => any): any;
 /**
+* @description Connects to a network with the ssid specified using the password provided
+* @param ssid Network ssid
+* @param ssid Network psk
+* @param callback Returns error if the connection isn't successful
+*/
+export const connect: typeof secureConnection;
+/**
  * @description Connects to an open network with the ssid specified
  * @param ssid Network ssid
  * @param callback Returns error if the connection isn't successful
  */
 declare function openConnection(ssid: string, callback: (error: Error) => any): any;
+/**
+ * @description Connects to an open network with the ssid specified
+ * @param ssid Network ssid
+ * @param callback Returns error if the connection isn't successful
+ */
+export const connectOpen: typeof openConnection;
 /**
  * @description Connects to a network with the ssid specified using the password provided
  * @param ssid Network ssid
@@ -89,6 +123,14 @@ declare function openConnection(ssid: string, callback: (error: Error) => any): 
  * @param callback Returns error if the connection isn't successful
  */
 declare function enterpriseConnection(ssid: string, username: string, password: string, callback: (error: Error) => any): any;
+/**
+ * @description Connects to a network with the ssid specified using the password provided
+ * @param ssid Network ssid
+ * @param username User/identity to use on authentication
+ * @param password Password to use on authentication
+ * @param callback Returns error if the connection isn't successful
+ */
+export const connectEAP: typeof enterpriseConnection;
 /**
  * @description Disconnects from the network on the current interface
  * @param callback (err) returns err if the process fails
@@ -117,6 +159,12 @@ export function interfaceUp(iface: string, callback: (error: Error) => any): any
  * @param callback (err) returns err if unable to kill the process
  */
 declare function disableSupplicant(iface: string, callback: (error: Error) => any): any;
+/**
+ * @description Kills the supplicant process for the specified interface
+ * @param iface Interface used by supplicant (If not iface is supplied the current one will be used)
+ * @param callback (err) returns err if unable to kill the process
+ */
+export const killSupplicant: typeof disableSupplicant;
 /**
  * @description List the networks in an array, each network has Network ID, SSID, BSSID and FLAGS
  * @param callback (err, networksArray) returns err if the process fails, each network is a Json object that contains network_id, ssid, bssid and flags
@@ -183,5 +231,3 @@ export function status(iface: string, callback: (error: Error, status: Status) =
  * @param callback 
  */
 export function saveConfig(callback: (error: Error, data: {result: string}) => any): any;
-
-export { checkConnection as check, connection as connectTo, secureConnection as connect, openConnection as connectOpen, enterpriseConnection as connectEAP, disableSupplicant as killSupplicant };
