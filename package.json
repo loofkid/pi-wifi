@@ -15,7 +15,6 @@
     "pi",
     "wifi"
   ],
-  "types": "index.d.ts",
   "author": {
     "name": "Sean Canton",
     "email": "sean.canton@admobilize.com"
