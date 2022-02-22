@@ -1,5 +1,5 @@
 {
-  "name": "pi-wifi",
+  "name": "@loofkid/pi-wifi",
   "version": "1.2.0",
   "description": "Module for accessing wpa_cli on Raspberry Pi 3.",
   "main": "index.js",

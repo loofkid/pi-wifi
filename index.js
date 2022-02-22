@@ -44,6 +44,14 @@ function scan(callback) {
   });
 }
 
+/**
+* @method saveConfig
+* @param {Function} callback 
+*/
+function saveConfig(callback) {
+  tools.wpa.save_config(currentInterface, callback(err, data));
+}
+
 
 /**
 * @method findConnection
