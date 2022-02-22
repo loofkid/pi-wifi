@@ -568,5 +568,6 @@ module.exports = {
   scan: scan,
   setCurrentInterface: setCurrentInterface,
   startSupplicant: startSupplicant,
-  status: status
+  status: status,
+  saveConfig: saveConfig
 }
