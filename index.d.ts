@@ -1,3 +1,5 @@
+declare module '@loofkid/pi-wifi';
+
 declare interface ScanNetwork {
     bssid: string,
     frequency: number,
